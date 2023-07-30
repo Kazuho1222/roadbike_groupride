@@ -79,13 +79,21 @@
       </div>
       <% if user_signed_in? %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-outline-danger" type="button"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></button>
-          <button class="btn btn-danger" type="button"><%= link_to "投稿する",  class: "post" %></button>
+          <%= link_to '/users/sign_out', method: :delete do %>
+            <button class="btn btn-outline-danger" type="button">ログアウト</button>
+          <% end %>
+          <%= link_to '#', class: "post" do %>
+            <button class="btn btn-danger" type="button">投稿する</button>
+          <% end %>
         </div>
       <% else %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-outline-danger" type="button"><%= link_to "ログイン", new_user_session_path, class: "post" %></button>
-          <button class="btn btn-danger" type="button"><%= link_to "新規登録", new_user_registration_path, class: "post" %></button>
+          <%= link_to '/users/sign_in', class: "post" do %>
+            <button class="btn btn-outline-danger" type="button">ログイン</button>
+          <% end %>
+          <%= link_to '/users/sign_up', class: "post" do %>
+            <button class="btn btn-danger" type="button">新規登録</button>
+          <% end %>
         </div>
       <% end %>
     </div>
