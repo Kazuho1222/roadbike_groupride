@@ -77,10 +77,17 @@
         <input type="text" class="form-control" placeholder="キーワードを入力">
         <button class="btn btn-outline-success" type="button" id="button-addon2"><i class="fas fa-search"></i> 検索</button>
       </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-outline-danger" type="button">ログイン</button>
-        <button class="btn btn-danger" type="button">新規登録</button>
-      </div>
+      <% if user_signed_in? %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-outline-danger" type="button"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></button>
+          <button class="btn btn-danger" type="button"><%= link_to "投稿する",  class: "post" %></button>
+        </div>
+      <% else %>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-outline-danger" type="button"><%= link_to "ログイン", new_user_session_path, class: "post" %></button>
+          <button class="btn btn-danger" type="button"><%= link_to "新規登録", new_user_registration_path, class: "post" %></button>
+        </div>
+      <% end %>
     </div>
   </div>
 </header>
