@@ -121,32 +121,24 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <% if @events.present? %>
           <% @events.each do |event| %>
-            <li class='list'>
-              <%= link_to "/events/#{evnet.id}" do %>
-              <div class='item-img-content'>
-                <%= image_tag event.images, class: "event-img" %>
+            <%= link_to "/events/#{event.id}", class:"text-decoration-none" do %>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <%= image_tag event.images[0], class: "event-img" %>
 
-                <% if item.order.present? %>
-                  <div class='sold-out'>
-                    <span>Sold Out!!</span>
-                  </div>
-                <% end %>
-
-              </div>
-              <div class='event-info'>
-                <h3 class='event-title'>
-                  <%= event.title %>
-                </h3>
-                <div class='event-capacity'>
-                  <span><%= event.capacity %>人<br><%= event.description %></span>
-                  <div class='star-btn'>
-                    <%= image_tag "star.png", class:"star-icon" %>
-                    <span class='star-count'>0</span>
+                  <div class="card-body">
+                    <p class="card-text"><%= event.description %></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
+                      </div>
+                      <small class="text-muted">残り　<%= event.capacity %>人</small>
+                    </div>
                   </div>
                 </div>
               </div>
-              <% end %>
-            </li>
+            <% end %>
           <% end %>
         <% else %>
           <div class="col">
