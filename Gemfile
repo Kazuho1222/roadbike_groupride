@@ -58,6 +58,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'active_hash'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
 
 # 本番環境でのみ必要なGemはgroup :productionブロックに記述
 group :production do

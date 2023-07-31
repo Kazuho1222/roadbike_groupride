@@ -1,1 +1,6 @@
 <p>新規イベント投稿画面</p>
+<%= form_with model: @event, local: true  do |f| %>
+  <%= f.text_area :title %><br><br>
+  <%= f.file_field :images, multiple: true %><br>
+  <%= f.submit %>
+<% end %>
