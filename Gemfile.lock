@@ -149,7 +149,7 @@ GEM
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    mail (2.8.1)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -348,6 +348,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
+  mail (= 2.7.1)
   mini_magick
   mysql2 (>= 0.4.4)
   puma (~> 3.11)
