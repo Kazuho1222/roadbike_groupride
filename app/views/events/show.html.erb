@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow-sm">
+        <%= image_tag @event.images[0], class: "event-img" %>
+
+        <div class="card-body">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row" class="table-active">タイトル</th>
+                <td><%= @event.title %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">主催者</th>
+                <td><%= @event.user.name %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">説明</th>
+                <td><%= @event.description %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">カテゴリー</th>
+                <td><%= @event.category.name %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">集合場所</th>
+                <td><%= @event.meeting_place %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">帰着場所</th>
+                <td><%= @event.return_place %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">走行距離</th>
+                <td><%= @event.distance %>km</td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">獲得標高</th>
+                <td><%= @event.climbing %>m</td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">出発日時</th>
+                <td><%= @event.start_time.strftime('%Y年%m月%d日%H時%M分') %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">解散日時</th>
+                <td><%= @event.end_time.strftime('%Y年%m月%d日%H時%M分') %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="table-active">募集人数</th>
+                <td><%= @event.capacity %>人</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between align-items-center">
+            <% if user_signed_in? && current_user.id == @event.user_id %>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary rounded-pill btn-lg">編集</button>
+                <button type="button" class="btn btn-danger rounded-pill btn-lg">削除</button>
+              </div>
+            <% elsif user_signed_in? %>
+              <button type="button" class="btn btn-danger rounded-pill btn-lg">エントリー</button>
+            <% end %>
+          </div><br>
+          <p class="h2">コメント</p>
+          <hr class="border border-primary border-2 opacity-50">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Comments</label><br>
+            <button type="button" class="btn btn-primary rounded-pill btn-lg">コメントする</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
