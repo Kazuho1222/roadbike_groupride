@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :show]
+  before_action :authenticate_user!, only: [:new, :show, :edit]
 
   def index
     @events = Event.order('created_at DESC')
@@ -20,6 +20,19 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to event_path
+    else
+      render :edit
+    end
   end
 
   private
