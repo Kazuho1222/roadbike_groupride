@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :show, :edit]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @events = Event.order('created_at DESC')
@@ -19,15 +20,12 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
     if @event.update(event_params)
       redirect_to event_path
     else
@@ -35,10 +33,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event.destroy
+    redirect_to root_path
+  end
+
   private
 
   def event_params
     params.require(:event).permit(:title, :description, :category_id, :meeting_place, :return_place, :distance, :climbing,
                                   :start_time, :end_time, :capacity, :user, { images: [] }).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @event = Event.find(params[:id])
   end
 end
