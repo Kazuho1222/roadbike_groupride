@@ -4,6 +4,11 @@
     <div class="col">
       <div class="card shadow-sm">
         <%= image_tag @event.images[0], class: "event-img" %>
+        <% if @event.available_slots == 0 %>
+          <div class='end-of-recruitment'>
+            <span>募集終了</span>
+          </div>
+        <% end %>
 
         <div class="card-body">
           <table class="table table-bordered">
@@ -50,18 +55,22 @@
               </tr>
               <tr>
                 <th scope="row" class="table-active">募集人数</th>
-                <td><%= @event.capacity %>人</td>
+                <td><%= @event.available_slots %>/<%= @event.capacity %>人</td>
               </tr>
             </tbody>
           </table>
           <div class="d-flex justify-content-between align-items-center">
-            <% if user_signed_in? && current_user.id == @event.user_id %>
-              <div class="btn-group">
-                <%= link_to "編集", "/events/#{@event.id}/edit", method: :get, class: "btn btn-primary rounded-pill btn-lg" %>
-                <%= link_to "削除", event_path(@event.id), method: :delete, class: "btn btn-danger rounded-pill btn-lg" %>
-              </div>
-            <% elsif user_signed_in? %>
-              <button type="button" class="btn btn-danger rounded-pill btn-lg">エントリー</button>
+            <% unless @event.available_slots == 0 %>
+              <% if user_signed_in? && current_user.id == @event.user_id %>
+                <div class="btn-group mx-auto">
+                  <%= link_to "編集", "/events/#{@event.id}/edit", method: :get, class: "btn btn-primary rounded-pill btn-lg" %>
+                  <%= link_to "削除", event_path(@event.id), method: :delete, class: "btn btn-danger rounded-pill btn-lg" %>
+                </div>
+              <% elsif current_user.attendances.where(event: @event).exists? %>
+                <button type="button" class= "btn btn-danger rounded-pill btn-lg mx-auto" disabled>エントリー済み</button>
+              <% elsif user_signed_in? %>
+                <%= link_to "エントリーする", entry_event_path(@event.id), method: :post, class: "btn btn-danger rounded-pill btn-lg mx-auto" %>
+              <% end %>
             <% end %>
           </div><br>
           <p class="h2">コメント</p>
@@ -69,7 +78,7 @@
           <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Comments</label><br>
-            <button type="button" class="btn btn-primary rounded-pill btn-lg">コメントする</button>
+            <button type="button" class="btn btn-primary rounded-pill btn-lg mx-auto">コメントする</button>
           </div>
         </div>
       </div>

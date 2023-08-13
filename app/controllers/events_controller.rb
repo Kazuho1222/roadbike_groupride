@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :show, :edit, :destroy]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :destroy, :entry]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :entry]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @events = Event.order('created_at DESC')
@@ -23,6 +24,9 @@ class EventsController < ApplicationController
   end
 
   def edit
+    return unless @event.available_slots == 0
+
+    redirect_to root_path
   end
 
   def update
@@ -38,6 +42,13 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
+  def entry
+    return unless @event.available_slots.positive?
+
+    current_user.attendances.create(event: @event)
+    redirect_to root_path, flash: { success: 'エントリーが完了しました。' }
+  end
+
   private
 
   def event_params
@@ -47,5 +58,11 @@ class EventsController < ApplicationController
 
   def set_item
     @event = Event.find(params[:id])
+  end
+
+  def move_to_index
+    return if current_user == @event.user
+
+    redirect_to action: :index
   end
 end

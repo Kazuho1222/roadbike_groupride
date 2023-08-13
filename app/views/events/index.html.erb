@@ -117,6 +117,8 @@
 
   <div class="album py-5 bg-light">
     <div class="container">
+    <%= render partial: 'layouts/flash' %>
+
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <% if @events.present? %>
@@ -125,7 +127,11 @@
               <div class="col">
                 <div class="card shadow-sm">
                   <%= image_tag event.images[0], class: "event-img" %>
-
+                  <% if event.available_slots == 0 %>
+                    <div class='end-of-recruitment'>
+                      <span>募集終了</span>
+                    </div>
+                  <% end %>
                   <div class="card-body">
                     <h5 class="card-title d-inline-block text-truncate" style="max-width: 100%;"><%= event.title %></h5><br>
                     <p class="card-text d-inline-block text-truncate" style="max-width: 100%;"><%= event.description %></p>
@@ -134,7 +140,7 @@
                         <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
                       </div>
-                      <small class="text-muted">残り　<%= event.capacity %>人</small>
+                      <small class="text-muted">残り　<%= event.available_slots %>人</small>
                     </div>
                   </div>
                 </div>
