@@ -127,7 +127,7 @@
               <div class="col">
                 <div class="card shadow-sm">
                   <%= image_tag event.images[0], class: "event-img" %>
-                  <% if event.available_slots == 0 %>
+                  <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
                     <div class='end-of-recruitment'>
                       <span>募集終了</span>
                     </div>

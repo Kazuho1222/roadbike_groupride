@@ -4,7 +4,7 @@
     <div class="col">
       <div class="card shadow-sm">
         <%= image_tag @event.images[0], class: "event-img" %>
-        <% if @event.available_slots == 0 %>
+        <% if @event.available_slots == 0 || @event.start_time < Time.zone.today %>
           <div class='end-of-recruitment'>
             <span>募集終了</span>
           </div>
@@ -60,7 +60,7 @@
             </tbody>
           </table>
           <div class="d-flex justify-content-between align-items-center">
-            <% unless @event.available_slots == 0 %>
+            <% unless @event.available_slots == 0 || @event.start_time < Time.zone.today %>
               <% if user_signed_in? && current_user.id == @event.user_id %>
                 <div class="btn-group mx-auto">
                   <%= link_to "編集", "/events/#{@event.id}/edit", method: :get, class: "btn btn-primary rounded-pill btn-lg" %>
