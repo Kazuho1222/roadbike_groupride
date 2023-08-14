@@ -9,18 +9,18 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     attributes:
       user:
-        nickname: ニックネーム
+        name: 名前
       event:
         title: タイトル
-        Description: 説明
-        Meeting place : 集合場所
-        Return place : 帰着場所
-        Distance : 走行距離
-        Climbing : 獲得標高
-        Start time : 出発日時
-        End time : 解散日時
-        Capacity : 募集人数
-        Category : カテゴリー
+        description: 説明
+        meeting place : 集合場所
+        return place : 帰着場所
+        distance : 走行距離
+        climbing : 獲得標高
+        start time : 出発日時
+        end time : 解散日時
+        capacity : 募集人数
+        category : カテゴリー
         images: 画像
   date:
     abbr_day_names:
