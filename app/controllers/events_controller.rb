@@ -46,7 +46,7 @@ class EventsController < ApplicationController
     return unless @event.available_slots.positive?
 
     current_user.attendances.create(event: @event)
-    redirect_to root_path, flash: { success: 'エントリーが完了しました。' }
+    redirect_to root_path, success: 'エントリーが完了しました。'
   end
 
   private

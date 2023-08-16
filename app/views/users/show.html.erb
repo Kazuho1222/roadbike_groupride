@@ -1,7 +1,13 @@
-<% if user_signed_in? && @user == current_user %>
-  <h1>マイページ</h1>
-<% else %>
-  <h1>ユーザーページ</h1>
+<!-- app/views/users/show.html.erb -->
+<h1><%= @user.name %>'s Profile</h1>
+<% if @editable %>
+  <%= link_to 'Edit Profile', edit_user_path(@user) %>
 <% end %>
 
-<h1><%= @user.name %>のユーザーページ</h1>
+<% if @user == current_user %>
+  <!-- マイページの内容を表示 -->
+  <%= render 'my_page_content' %>
+<% else %>
+  <!-- プロフィールページの内容を表示 -->
+  <%= render 'profile_page_content' %>
+<% end %>

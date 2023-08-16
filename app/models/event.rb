@@ -20,12 +20,13 @@ class Event < ApplicationRecord
 
   def date_before_start
     return if start_time.blank?
-    errors.add(:start_time, "は今日以降のものを選択してください") if start_time < Time.zone.today
+
+    errors.add(:start_time, 'は今日以降のものを選択してください') if start_time < Time.zone.today
   end
 
   def date_before_end
     return if end_time.blank? || start_time.blank?
-    errors.add(:end_time, "は開始日以降のものを選択してください") if end_time < start_time
-  end
 
+    errors.add(:end_time, 'は開始日以降のものを選択してください') if end_time < start_time
+  end
 end
