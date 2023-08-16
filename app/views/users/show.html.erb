@@ -1,0 +1,13 @@
+<!-- app/views/users/show.html.erb -->
+<h1><%= @user.name %>'s Profile</h1>
+<% if @editable %>
+  <%= link_to 'Edit Profile', edit_user_path(@user) %>
+<% end %>
+
+<% if @user == current_user %>
+  <!-- マイページの内容を表示 -->
+  <%= render 'my_page_content' %>
+<% else %>
+  <!-- プロフィールページの内容を表示 -->
+  <%= render 'profile_page_content' %>
+<% end %>
