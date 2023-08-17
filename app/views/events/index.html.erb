@@ -1,14 +1,15 @@
-<div class="bg-body-tertiary p-3 p-sm-5">
-  <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+<div class="bg-body-tertiary">
+  <div class="bg-image p-2 text-center shadow-1-strong text-white"
        style="background-image: url('<%= asset_path('road-bikes-1562929.jpg') %>'); background-size:cover; background-position: 50% 50%;   background-color: rgba(0,0,0,0.5); background-blend-mode: darken;">
-    <h1 class="display-4"><strong>Roadbike Groupride</h1></strong>
-    <p class="lead">旅気分で仲間と走ろう！<br>仲間とトレーニング？<br>ゆるポタでカフェライド？<br>あなたが望むライドイベントを探そう！</p>
+    <h1 class="display-4"><strong>Roadbike Group Ride</strong></h1>
+    <p class="small">旅気分で仲間と走ろう！<br>仲間とトレーニング？<br>ゆるポタでカフェライド？<br>あなたが望むライドイベントを探そう！</p>
     <a class="btn btn-primary btn-lg" href="#" role="button">もっと学ぼう &raquo;</a>
   </div>
 </div>
 
-<div class="album py-5 bg-light">
+<div class="album py-3 bg-light">
   <div class="container">
+    <h2 class="display-7 text-center"><strong>イベント一覧</strong></h2>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <% if @events.present? %>
@@ -16,7 +17,7 @@
           <%= link_to "/events/#{event.id}", class:"text-decoration-none" do %>
             <div class="col">
               <div class="card shadow-sm">
-                <%= image_tag event.images[0], class: "event-img" %>
+                <%= image_tag event.images[0], class: "event-img " %>
                 <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
                   <div class='end-of-recruitment'>
                     <span>募集終了</span>

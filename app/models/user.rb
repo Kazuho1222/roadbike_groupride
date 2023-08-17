@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :attendances
   # has_many :comments
+  has_one_attached :avatar
 
   mount_uploader :avatar, AvatarUploader
 end
