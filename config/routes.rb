@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # resource :profiles, only: [:show, :edit, :update]
   resources :users, only: [:show, :edit, :update]
   resources :events do
+    resources :comments, only: :create
     member do
       post 'entry'
     end

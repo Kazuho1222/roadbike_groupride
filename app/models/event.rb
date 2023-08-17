@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
   has_many :attendances
-  # has_many :comments
+  has_many :comments
   has_many_attached :images
 
   def available_slots
