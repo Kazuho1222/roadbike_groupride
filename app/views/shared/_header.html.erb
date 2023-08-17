@@ -32,7 +32,7 @@
       </div>
       <% if user_signed_in? %>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <%= link_to image_tag(current_user.avatar.url, class: 'rounded-circle', size: '50x50'), user_path(current_user) %>
+          <%= link_to image_tag(current_user.avatar.url, class: 'rounded-circle', size: '50x50', id: "js-user-icon"), user_path(current_user) %>
           <%= link_to '/users/sign_out', method: :delete do %>
             <button class="btn btn-outline-danger" type="button">ログアウト</button>
           <% end %>

@@ -81,7 +81,7 @@
               <% @event.comments.each do |comment| %>
                 <div class="comment">
                   <%= link_to user_path(comment.user) do %>
-                    <%= image_tag(comment.user.avatar.url, class: 'rounded-circle', size: '50x50', id:"js-user-icon") %>
+                    <%= image_tag(comment.user.avatar.url, class: 'rounded-circle', size: '50x50') %>
                   <% end %>
                   <p class="user-info"><%= comment.user.name %>： </p>
                   <p><%= comment.text %></p>
