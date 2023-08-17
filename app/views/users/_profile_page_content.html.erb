@@ -13,6 +13,21 @@
           <th scope="row"><%= User.human_attribute_name(:avatar) %></th>
           <td><%= image_tag @user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
         </tr>
+        <% if current_user != @user %>
+          <% if @user.followed_by?(current_user) %>
+            <%=link_to user_relationships_path(@user.id), class: "btn", method: :delete do %>
+              <button class="btn btn-danger" type="button">フォロー中</button>
+            <% end %>
+          <% else %>
+            <%=link_to user_relationships_path(@user.id), class: "btn", method: :post do %>
+              <button class="btn btn-outline-danger" type="button">フォローする</button>
+            <% end %>
+          <% end %>
+          <h3>フォロワー</h3>
+          <% @user.followers.each do |user| %>
+            <p class=“f-user”><%= link_to user.name, user_path(user.id) %></p>
+          <% end %>
+        <% end %>
       </table>
     </div>
   </div>
