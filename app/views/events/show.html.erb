@@ -75,12 +75,24 @@
               <% end %>
             <% end %>
           </div><br>
+          <div id="comments">
+            <p class="h2">コメント一覧</p>
+            <hr class="border border-primary border-2 opacity-50">
+              <% @event.comments.each do |comment| %>
+                <div class="comment">
+                  <p><%= link_to image_tag(current_user.avatar.url, class: 'rounded-circle', size: '50x50'), user_path(current_user) %></p>
+                  <p class="user-info"><%= comment.user.name %>： </p>
+                  <p><%= comment.text %></p>
+                </div>
+              <% end %>
+          </div>
           <p class="h2">コメント</p>
           <hr class="border border-primary border-2 opacity-50">
           <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-            <label for="floatingTextarea2">Comments</label><br>
-            <button type="button" class="btn btn-primary rounded-pill btn-lg mx-auto">コメントする</button>
+            <%= form_with model: [@event, @comment], id: "floatingTextarea2" do |f| %>
+              <%= f.text_area :text, placeholder:"Comments", style:"height: 100px", class: "form-control" %>
+              <%= f.submit "コメントする", class: "btn btn-primary rounded-pill btn-lg mx-auto" %>
+            <% end %>
           </div>
         </div>
       </div>
