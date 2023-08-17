@@ -38,8 +38,12 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy
-    redirect_to root_path
+    if @event.attendances.present?
+      redirect_to event_path
+    else
+      @event.destroy
+      redirect_to root_path
+    end
   end
 
   def entry
