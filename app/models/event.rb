@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :comments
   has_many_attached :images
+  has_many :likes
 
   def available_slots
     capacity - attendances.count
@@ -28,5 +29,9 @@ class Event < ApplicationRecord
     return if end_time.blank? || start_time.blank?
 
     errors.add(:end_time, 'は開始日以降のものを選択してください') if end_time < start_time
+  end
+
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
   end
 end
