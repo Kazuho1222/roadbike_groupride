@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
   end
   resources :events do
+    resource :likes, only: [:create, :destroy]
     resources :comments, only: :create
     member do
       post 'entry'

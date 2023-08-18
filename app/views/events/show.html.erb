@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col">
       <div class="card shadow-sm">
-        <%= image_tag @event.images[0], class: "event-img" %>
+        <%= image_tag @event.images[0], class: "event-img card-img-top" %>
         <% if @event.available_slots == 0 || @event.start_time < Time.zone.today %>
           <div class='end-of-recruitment'>
             <span>募集終了</span>
