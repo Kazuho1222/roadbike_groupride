@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @editable = @user == current_user
-    @events = Event.order('created_at DESC')
-    @events_post = Event.where(user_id: params[:id]).order('created_at DESC')
+    @events = Event.order('created_at DESC').page(params[:page]).per(10)
+    @events_post = Event.where(user_id: params[:id]).order('created_at DESC').page(params[:page])
   end
 
   def edit

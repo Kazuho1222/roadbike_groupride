@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
-    @events = Event.order('created_at DESC')
+    @events = Event.order('created_at DESC').page(params[:page]).per(10)
   end
 
   def new
@@ -53,6 +53,16 @@ class EventsController < ApplicationController
 
     current_user.attendances.create(event: @event)
     redirect_to root_path, success: 'エントリーが完了しました。'
+  end
+
+  def search
+    if params[:q]&.dig(:title)
+      squished_keywords = params[:q][:title].squish
+      params[:q][:title_cont_any] = squished_keywords.split(' ')
+    end
+    @q = Event.ransack(params[:q])
+    # @q.sorts = 'created_at' if @q.sorts.empty?
+    @events = @q.result.page(params[:page]).per(10)
   end
 
   private
