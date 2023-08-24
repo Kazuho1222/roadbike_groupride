@@ -12,5 +12,8 @@ Rails.application.routes.draw do
     member do
       post 'entry'
     end
+    collection do
+      get 'search'
+    end
   end
 end

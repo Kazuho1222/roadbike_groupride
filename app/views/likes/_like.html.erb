@@ -1,7 +1,11 @@
 <% unless event.available_slots == 0 || event.start_time < Time.zone.today %>
   <% if user_signed_in? && event.liked_by?(current_user) %>
-    <%=link_to "いいね済", event_likes_path(event.id),  method: :delete, class: "event_likes", remote: true %>
+    <%=link_to event_likes_path(event.id),  method: :delete, class: "event_likes", remote: true do %>
+      <i class="fa-solid fa-star"></i>
+    <% end %>
   <% else %>
-    <%=link_to "いいねする", event_likes_path(event.id), method: :post, class: "event_likes", remote: true %>
+    <%=link_to event_likes_path(event.id), method: :post, class: "event_likes", remote: true do %>
+      <i class="fa-regular fa-star"></i>
+    <% end %>
   <% end %>
 <% end %>

@@ -1,0 +1,86 @@
+<div class="container">
+  <h3 class="mt-3">検索ページ</h3>
+  <small class="text-muted">検索結果を一覧表示します</small class>
+    <div class="row mt-3">
+      <div class="col-6 col-lg-4">
+        <div class='event-contents' id="detailed-search-result-wrapper">
+          <%= search_form_for @q, url: search_events_path, html: {id: "detailed-search-form"} do |f|%>
+            <div class="mb-2">
+              <%= f.label :title, 'イベント名' %>
+              <br>
+              <%= f.text_field :title, placeholder: 'イベント名', value: params[:q]&.dig(:title) , class: 'form-control' %>
+            </div>
+            <div class="mb-2">
+              <%= f.label :user_name_cont, '主催者'%>
+              <br>
+              <%= f.text_field :user_name_cont, placeholder: '主催者名' , class: 'form-control' %>
+            </div>
+            <div class="search-field">
+              <%= f.label :category_id_in, 'カテゴリ' %>
+              <br>
+              <%= f.collection_check_boxes :category_id_in, Category.where.not(id: 1), :id, :name %>
+            </div>
+            <div class="row mb-2">
+              <%= f.label :distance_gteq, '距離' %>
+              <div class="col-sm">
+                <%= f.number_field :distance_gteq , class: 'form-control' %>km以上
+              </div>
+              <div class="col-sm">
+                <%= f.number_field :distance_lteq , class: 'form-control' %>km以下
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <%= f.label :climbing_gteq, '獲得標高' %>
+              <div class="col-sm">
+                <%= f.number_field :climbing_gteq , class: 'form-control' %>m以上
+              </div>
+              <div class="col-sm">
+                <%= f.number_field :climbing_lteq , class: 'form-control' %>m以下
+              </div>
+            </div>
+            <div class="mb-2">
+              <%= f.label :meeting_place_cont, '集合場所' %>
+              <br>
+              <%= f.text_field :meeting_place_cont, placeholder: '集合場所' , class: 'form-control' %>
+            </div>
+            <div class="mb-2">
+              <%= f.label :return_place_cont, '帰着場所' %>
+              <br>
+              <%= f.text_field :return_place_cont, placeholder: '帰着場所' , class: 'form-control' %>
+            </div>
+            <div class="mb-2">
+              <%= f.label :start_time_cont, '出発日時' %>
+              <br>
+              <%= f.date_field :start_time, class: 'form-control' %>
+            </div>
+            <div class="mb-2">
+              <%= f.label :end_time_cont, '解散日時' %>
+              <br>
+              <%= f.date_field :end_time, class: 'form-control' %>
+            </div>
+            <%# チェックボックス  %>
+            <!--
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1">募集中のみ</label>
+            </div>
+            -->
+            <%# /チェックボックス  %>
+            <%= f.submit '検索', class: "btn btn-primary rounded-pill btn-lg mt-3" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-8">
+        <% if @events.empty? %>
+          <h2>検索結果は何もありません</h2>
+        <% else %>
+          <%= render 'event'%>
+
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <% if @events.present? %>
+    <% @events.each do |event| %>
+      <% if event.liked_by?(current_user) %>
+      <%= link_to event_path(event.id), class:"text-decoration-none" do %>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= image_tag event.images[0], class: "event-img card-img-top" %>
+            <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
+              <div class='end-of-recruitment'>
+                <span>募集終了</span>
+              </div>
+            <% end %>
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title d-inline-block text-truncate" style="max-width: 100%;"><%= event.title %></h5><br>
+
+                <div class="event">
+                  <div id="like-btn<%= event.id %>">
+                    <%= render partial: "likes/like", locals: { event: event } %>
+                  </div>
+                </div>
+              </div>
+
+              <p class="card-text d-inline-block text-truncate" style="max-width: 100%;"><%= event.description %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
+                </div>
+                <small class="text-muted">残り　<%= event.available_slots %>人</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= render 'eventsample' %>
+  <% end %>
+</div>
+<div class="mt-3">
+  <%= paginate @events, theme: 'bootstrap-5'%>
+</div>

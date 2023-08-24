@@ -31,7 +31,7 @@
           <a class="nav-link" id="event-entry-tab" data-bs-toggle="tab" data-bs-target="#event-entry-tab-pane" role="tab" aria-controls="event-entry-tab-pane" aria-selected="false">イベントエントリー済み</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" role="tab" data-bs-toggle="tab">Disabled</a>
+          <a class="nav-link"id="event-like-tab" data-bs-toggle="tab" data-bs-target="#event-like-tab-pane" role="tab" aria-controls="event-like-tab-pane" aria-selected="false">お気に入り済み</a>
         </li>
       </ul>
     </div>
@@ -39,172 +39,13 @@
   <!-- パネル部分 -->
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane active" id="event-tab-pane" role="tabpanel" aria-labelledby="event-tab" tabindex="0">
-      <div class="card-body">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <% if @events.present? %>
-              <% @events_post.each do |event| %>
-                <%= link_to "/events/#{event.id}", class:"text-decoration-none" do %>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <%= image_tag event.images[0], class: "event-img" %>
-                      <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
-                        <div class='end-of-recruitment'>
-                          <span>募集終了</span>
-                        </div>
-                      <% end %>
-                      <div class="card-body">
-                        <h5 class="card-title d-inline-block text-truncate" style="max-width: 100%;"><%= event.title %></h5><br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%;"><%= event.description %></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
-                          </div>
-                          <small class="text-muted">残り　<%= event.available_slots %>人</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
-            <% else %>
-              <div class="col">
-                <div class="card shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                  <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-muted">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                  <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-muted">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                  <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-muted">9 mins</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <%= render 'events/event-post' %>
     </div>
     <div class="tab-pane" id="event-entry-tab-pane" role="tabpanel" aria-labelledby="event-entry-tab" tabindex="0">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <% if @events.present? && %>
-            <% @events.each do |event| %>
-              <% if current_user.attendances.where(event: event).exists? %>
-                <%= link_to "/events/#{event.id}", class:"text-decoration-none" do %>
-                  <div class="col">
-                    <div class="card shadow-sm">
-                      <%= image_tag event.images[0], class: "event-img" %>
-                      <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
-                        <div class='end-of-recruitment'>
-                          <span>募集終了</span>
-                        </div>
-                      <% end %>
-                      <div class="card-body">
-                        <h5 class="card-title d-inline-block text-truncate" style="max-width: 100%;"><%= event.title %></h5><br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%;"><%= event.description %></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
-                          </div>
-                          <small class="text-muted">残り　<%= event.available_slots %>人</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% else %>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'events/event-entry' %>
+    </div>
+    <div class="tab-pane" id="event-like-tab-pane" role="tabpanel" aria-labelledby="event-like-tab" tabindex="0">
+      <%= render 'events/event-like' %>
     </div>
   </div>
 </div>
