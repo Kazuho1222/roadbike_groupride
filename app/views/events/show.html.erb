@@ -5,8 +5,8 @@
       <div class="card shadow-sm">
         <%= image_tag @event.images[0], class: "event-img card-img-top" %>
         <% if @event.available_slots == 0 || @event.start_time < Time.zone.today %>
-          <div class='end-of-recruitment'>
-            <span>募集終了</span>
+          <div class='close-wrapper'>
+            <span>CLOSED</span>
           </div>
         <% end %>
 
@@ -19,7 +19,7 @@
               </tr>
               <tr>
                 <th scope="row" class="table-active">主催者</th>
-                <td><%= @event.user.name %></td>
+                <td><%= link_to @event.user.name, user_path(@event.user_id), class: "text-decoration-none text-reset" %></td>
               </tr>
               <tr>
                 <th scope="row" class="table-active">説明</th>
@@ -80,20 +80,22 @@
             <hr class="border border-primary border-2 opacity-50">
               <% @event.comments.each do |comment| %>
                 <div class="comment">
-                  <%= link_to user_path(comment.user) do %>
-                    <%= image_tag(comment.user.avatar.url, class: 'rounded-circle', size: '50x50') %>
-                  <% end %>
-                  <p class="user-info"><%= comment.user.name %>： </p>
-                  <p><%= comment.text %></p>
+                  <div class="d-flex justify-content-start align-items-center mb-2">
+                    <%= link_to user_path(comment.user) do %>
+                      <%= image_tag(comment.user.avatar.url, class: 'rounded-circle', size: '50x50') %>
+                    <% end %>
+                    <div class="user-info ms-2"><%= link_to comment.user.name, user_path(comment.user), class: "text-decoration-none text-reset" %>： </div>
+                    <div><%= comment.text %></div>
+                  </div>
                 </div>
               <% end %>
           </div>
-          <p class="h2">コメント</p>
+          <p class="h2 mt-3">コメント</p>
           <hr class="border border-primary border-2 opacity-50">
           <div class="comment-form">
             <%= form_with model: [@event, @comment], id: "comment-form" do |f| %>
               <%= f.text_area :text, placeholder:"コメントを入力してください", style:"height: 100px", class: "form-control" %>
-              <%= f.submit "コメントする", class: "btn btn-primary rounded-pill btn-lg mx-auto" %>
+              <%= f.submit "コメントする", class: "btn btn-primary rounded-pill btn-lg mx-auto mt-3" %>
             <% end %>
           </div>
         </div>

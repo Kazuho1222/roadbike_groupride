@@ -18,3 +18,31 @@
  .selector-for-some-widget {
   box-sizing: content-box;
  }
+
+ .close-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 85px;
+  height: 85px;
+  overflow: hidden;
+  text-align: center;
+ }
+
+ .close-wrapper>span {
+  display: inline-block;
+  position: absolute;
+  padding: 5px 0;
+  left: -24px;
+  top: 20px;
+  width: 160px;
+  text-align: center;
+  line-height: 20px;
+  background: crimson;
+  letter-spacing: 0.05em;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+ }

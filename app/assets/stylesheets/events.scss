@@ -2,17 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.end-of-recruitment {
-  position: absolute;
-  top: 40%;
+.form-signin {
   width: 100%;
-  text-align: center;
-  background-color: crimson;
-  transform: skewY(-10deg);
+/*  以下を修正
+  max-width: 330px;
+  padding: 15px;  */
+  margin: auto;
+  max-width: 400px;
+  padding: 60px 20px;
 }
-
-.end-of-recruitment>span {
-  color: #FFF;
-  font-size: 45px;
-  font: bold;
+/* 以下を追加 */
+*{
+  font-family: 'Sawarabi Gothic', 'Noto Sans JP', sans-serif;
+}
+.login {
+display: -ms-flexbox;
+display: flex;
+-ms-flex-align: center;
+align-items: center;
+padding-top: 40px;
+padding-bottom: 40px;
+background-color: #f5f5f5;
+}
+.bland-red{
+  color: #cc0000;
 }
