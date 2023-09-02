@@ -23,7 +23,7 @@ http://54.92.53.229/
 [要件定義書](https://docs.google.com/spreadsheets/d/1Mu4cBakDLOXHAyDNGOb5jlJaxfQvG7XmzzJknaKLceA/edit?usp=sharing)
 # 実装した機能についての画像やGIFおよびその説明
 ## お気に入り機能
-[![Image from Gyazo](https://i.gyazo.com/5681aac4348c42738bd11d1fa119d47d.gif)](https://gyazo.com/5681aac4348c42738bd11d1fa119d47d)<br>
+[![Image from Gyazo](https://i.gyazo.com/008c04102dac36ec7fba4348287cb581.gif)](https://gyazo.com/008c04102dac36ec7fba4348287cb581)<br>
 イベント一覧内の☆をクリックすると、非同期通信によって★に変更され、お気に入り登録することができる。もう一度クリックすると、☆に戻り、お気に入り解除することができる。
 # 実装予定の機能
 タグ機能、走行ルート表示機能を実装予定。
