@@ -4,7 +4,9 @@
       <%= link_to event_path(event.id), class:"text-decoration-none" do %>
         <div class="col">
           <div class="card shadow-sm">
-            <%= image_tag event.images[0], :width => '200', :height => '200', class: "event-img card-img-top" %>
+            <div class="top-image">
+              <%= image_tag event.images[0], :width => '200', :height => '200', class: "event-img card-img-top" %>
+            </div>
             <% if event.available_slots == 0 || event.start_time < Time.zone.today %>
               <div class='close-wrapper'>
                 <span>CLOSED</span>

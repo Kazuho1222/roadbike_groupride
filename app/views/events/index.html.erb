@@ -3,15 +3,13 @@
        style="background-image: url('<%= asset_path('road-bikes-1562929.jpg') %>'); background-size:cover; background-position: 50% 50%;   background-color: rgba(0,0,0,0.5); background-blend-mode: darken;">
     <h1 class="display-4"><strong>Roadbike Group Ride</strong></h1>
     <p class="small">旅気分で仲間と走ろう！<br>仲間とトレーニング？<br>ゆるポタでカフェライド？<br>あなたが望むライドイベントを探そう！</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">もっと学ぼう &raquo;</a>
+    <%= link_to 'イベント検索', search_events_path, class:"btn btn-primary btn-lg" %>
   </div>
 </div>
 
 <div class="album py-3 bg-light">
   <div class="container">
     <h2 class="display-7 text-center"><strong>イベント一覧</strong></h2>
-    <h3 class="text-center"><%= link_to 'イベント検索', search_events_path %></h3>
-
 
   <%= render 'event' %>
 
