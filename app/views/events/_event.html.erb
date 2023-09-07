@@ -32,6 +32,10 @@
                   <small class="text-muted">残り　<%= event.available_slots %>人</small>
                 </div>
               </div>
+              <div class="card-footer">
+                <small class="text-muted"><%= event.start_time.strftime('%Y年%m月%d日%H時%M分') %></small>
+              </div>
+
             <% end %>
           </div>
         </div>

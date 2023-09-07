@@ -8,12 +8,14 @@
           <p class="h2 mt-3">新規イベント投稿画面</p>
           <hr class="border border-primary border-2 opacity-50">
 
-              <div class="form-floating mb-3">
+              <div class="m-3">
                 <div id="previews"></div>
-                <div class="click-upload">
+                <label for="formFileMultiple" class="form-label">ファイルを選択</label>
+                <div class="click-upload form-control" type="file" id="formFileMultiple" multiple>
                   <%= f.file_field :images, multiple: true %><br>
                 </div>
               </div>
+
               <div class="form-floating m-3">
                 <%= f.text_field :title, class:"form-control", maxlength:"40" %>
                 <label for="title">タイトル</label>
