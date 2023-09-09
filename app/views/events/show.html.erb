@@ -59,6 +59,12 @@
               </tr>
             </tbody>
           </table>
+          <div class="event text-center mb-3">
+            <div id="like-btn<%= @event.id %>">
+              <%= render partial: "likes/like", locals: { event: @event } %>
+            </div>
+          </div>
+
           <div class="d-flex justify-content-between align-items-center">
             <% unless @event.available_slots == 0 || @event.start_time < Time.zone.today %>
               <% if user_signed_in? && current_user.id == @event.user_id %>
