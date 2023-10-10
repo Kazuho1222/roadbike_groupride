@@ -71,6 +71,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'ransack'
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
+gem 'bootstrap'
 
 # 本番環境でのみ必要なGemはgroup :productionブロックに記述
 group :production do
