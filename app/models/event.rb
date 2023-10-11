@@ -14,7 +14,7 @@ class Event < ApplicationRecord
 
   validates :title, :description, :category_id, :meeting_place, :return_place, :distance, :climbing, :start_time, :end_time, :capacity, :user, :images,
             presence: true
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :category_id, numericality: { other_than: 1, message: "を選択してください" }
   validates :capacity, :distance, :climbing, presence: true, numericality: { greater_than: 0 }
   validate :date_before_start
   validate :date_before_end

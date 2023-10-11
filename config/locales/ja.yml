@@ -13,14 +13,14 @@ ja:
       event:
         title: タイトル
         description: 説明
-        meeting place : 集合場所
-        return place : 帰着場所
+        meeting_place : 集合場所
+        return_place : 帰着場所
         distance : 走行距離
         climbing : 獲得標高
-        start time : 出発日時
-        end time : 解散日時
+        start_time : 出発日時
+        end_time : 解散日時
         capacity : 募集人数
-        category : カテゴリー
+        category_id : カテゴリ
         images: 画像
   date:
     abbr_day_names:
