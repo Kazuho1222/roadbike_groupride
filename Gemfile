@@ -72,6 +72,7 @@ gem 'ransack'
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
 gem 'bootstrap'
+gem 'bootstrap_form', '~> 5.0'
 
 # 本番環境でのみ必要なGemはgroup :productionブロックに記述
 group :production do
