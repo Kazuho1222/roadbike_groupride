@@ -61,7 +61,7 @@ class EventsController < ApplicationController
       params[:q][:title_cont_any] = squished_keywords.split(' ')
     end
     @q = Event.ransack(params[:q])
-    # @q.sorts = 'created_at' if @q.sorts.empty?
+    @q.sorts = 'created_at desc' if @q.sorts.empty? # 'desc'は降順、'asc'は昇順
     @events = @q.result.page(params[:page]).per(10)
   end
 
