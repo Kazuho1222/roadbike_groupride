@@ -26,14 +26,20 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="input-group">
+      <div class="container input-group">
         <%= search_form_for Event.ransack(params[:q]), url: search_events_path, html: {class: "search-form"} do |f| %>
-          <%= f.text_field :title, placeholder: 'イベント名から探す', class: 'form-control' %>
-          <br>
-          <%= f.label :sumit, class: "search-button" do %>
-            <input type="submit" value="検索" class="send">
-            <%= f.submit :submit, id: "q_submit", style: "display: none;" %>
-          <% end %>
+          <div class ="row justify-content-center">
+            <div class="col-md-8">
+              <%= f.text_field :title, placeholder: 'イベント名から探す', class: 'form-control mx-auto' %>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <%= f.label :sumit, class: "search-button" do %>
+                <input type="submit" value="検索" class="btn btn-primary send mx-auto d-block">
+                <%= f.submit :submit, id: "q_submit", style: "display: none;" %>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
       <% if user_signed_in? %>
